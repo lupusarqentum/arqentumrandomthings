@@ -12,9 +12,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class InventoryItemsRegistration {
+    public class ItemsIDs {
+        public final static String important_paper = "important_paper";
+    }
+
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, RandomThingsMod.MODID);
 
-    public static final RegistryObject<Item> IMPORTANT_PAPER = ITEMS.register("important_paper", () -> new Item(
+    public static final RegistryObject<Item> IMPORTANT_PAPER = ITEMS.register(ItemsIDs.important_paper, () -> new Item(
             new Item.Properties().fireResistant().rarity(Rarity.EPIC)));
 
     public static void register(IEventBus modEventBus) {
