@@ -18,7 +18,7 @@ public class InventoryItemsRegistration {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, RandomThingsMod.MODID);
 
-    public static final RegistryObject<Item> IMPORTANT_PAPER = ITEMS.register(ItemsIDs.important_paper, () -> new Item(
+    public static final RegistryObject<Item> IMPORTANT_PAPER = ITEMS.register(ItemsIDs.important_paper, () -> new ImportantPaperItem(
             new Item.Properties().fireResistant().rarity(Rarity.EPIC).stacksTo(1)));
 
     public static void register(IEventBus modEventBus) {

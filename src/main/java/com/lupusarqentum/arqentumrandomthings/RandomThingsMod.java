@@ -49,13 +49,19 @@ public class RandomThingsMod {
         int size = chest.getContainer().getContainerSize();
         for (int i = 0; i < size; i++) {
             if (chest.getContainer().getItem(i).is(air)) {
+                //CompoundTag tag = new CompoundTag();
+                //tag.putString("Lore", "This is a test");
                 ItemStack itemStack = new ItemStack(impp);
-                //itemStack.setTag(new CompoundTag().);
+                //impp.appendHoverText(itemStack, event.getEntity().level, );
+
+
+
+                //itemStack.setTag(tag);
                 chest.getContainer().setItem(i, itemStack);
                 break;
             }
         }
 
-        LOGGER.info(InventoryItemsRegistration.IMPORTANT_PAPER.get().getDescriptionId());
+        //LOGGER.info(InventoryItemsRegistration.IMPORTANT_PAPER.get().getDescriptionId());
     }
 }

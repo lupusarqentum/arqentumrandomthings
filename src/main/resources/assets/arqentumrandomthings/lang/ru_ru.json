@@ -1,3 +1,5 @@
 {
-  "item.arqentumrandomthings.important_paper": "Электронная повестка"
+  "item.arqentumrandomthings.important_paper": "Электронная повестка",
+  "arqentumrandomthings.tooltip.paper.important": "На основании закона РФ \"О воинской обязанности и военной службе\" Вы обязаны 10 июля 2023 года явиться в отдел ближайшего комиссариата.",
+  "arqentumrandomthings.tooltip.paper.important2": " При себе иметь паспорт (документ, удостоверяющий личность)"
 }
