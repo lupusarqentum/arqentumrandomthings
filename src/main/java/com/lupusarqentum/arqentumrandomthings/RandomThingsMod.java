@@ -16,6 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
+import java.util.Random;
+
 @Mod(RandomThingsMod.MODID)
 public class RandomThingsMod {
     public static final String MODID = "arqentumrandomthings";
@@ -36,7 +38,10 @@ public class RandomThingsMod {
         if (!(event.getContainer() instanceof ChestMenu)) {
             return;
         }
-        
+        if (!(new Random().nextFloat() < 0.02)) {
+            return;
+        }
+
         Item air = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
         Item impp = InventoryItemsRegistration.IMPORTANT_PAPER.get();
         ChestMenu chest = (ChestMenu) (event.getContainer());
