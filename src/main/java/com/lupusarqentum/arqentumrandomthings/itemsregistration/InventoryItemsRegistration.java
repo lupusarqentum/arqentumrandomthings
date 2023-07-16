@@ -29,7 +29,8 @@ public class InventoryItemsRegistration {
 
     public void onCreativeModeTabAdding(CreativeModeTabEvent.BuildContents event) {
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(IMPORTANT_PAPER);
+            //event.accept(IMPORTANT_PAPER);
+            return;
         }
     }
 }

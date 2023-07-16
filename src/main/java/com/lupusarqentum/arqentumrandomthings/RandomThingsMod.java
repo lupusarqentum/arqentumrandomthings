@@ -2,6 +2,7 @@ package com.lupusarqentum.arqentumrandomthings;
 
 import com.lupusarqentum.arqentumrandomthings.itemsregistration.InventoryItemsRegistration;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
@@ -48,9 +49,13 @@ public class RandomThingsMod {
         int size = chest.getContainer().getContainerSize();
         for (int i = 0; i < size; i++) {
             if (chest.getContainer().getItem(i).is(air)) {
-                chest.getContainer().setItem(i, new ItemStack(impp));
+                ItemStack itemStack = new ItemStack(impp);
+                //itemStack.setTag(new CompoundTag().);
+                chest.getContainer().setItem(i, itemStack);
                 break;
             }
         }
+
+        LOGGER.info(InventoryItemsRegistration.IMPORTANT_PAPER.get().getDescriptionId());
     }
 }
