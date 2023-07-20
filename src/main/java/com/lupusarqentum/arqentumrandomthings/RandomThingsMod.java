@@ -12,10 +12,7 @@ import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
 import net.minecraftforge.registries.ForgeRegistries;
-import org.slf4j.Logger;
-import com.mojang.logging.LogUtils;
 
 @Mod(RandomThingsMod.MODID)
 public class RandomThingsMod {
@@ -23,13 +20,12 @@ public class RandomThingsMod {
 
     public RandomThingsMod() {
         Random.init();
+
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         InventoryItemsRegistration.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.addListener(this::onChestOpened);
     }
-
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public void onChestOpened(PlayerContainerEvent.Open event) {
         if (event.getEntity().level.isClientSide) {
