@@ -1,8 +1,8 @@
 package com.lupusarqentum.arqentumrandomthings;
 
 import com.lupusarqentum.arqentumrandomthings.itemsregistration.InventoryItemsRegistration;
+import com.lupusarqentum.arqentumrandomthings.common.Random;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
@@ -17,13 +17,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
-import java.util.Random;
-
 @Mod(RandomThingsMod.MODID)
 public class RandomThingsMod {
     public static final String MODID = "arqentumrandomthings";
 
     public RandomThingsMod() {
+        Random.init();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         InventoryItemsRegistration.register(modEventBus);
 
@@ -39,7 +38,7 @@ public class RandomThingsMod {
         if (!(event.getContainer() instanceof ChestMenu)) {
             return;
         }
-        if (!(new Random().nextFloat() < 0.02)) {
+        if (!(Random.nextFloat() < 0.02)) {
             return;
         }
 
@@ -49,19 +48,10 @@ public class RandomThingsMod {
         int size = chest.getContainer().getContainerSize();
         for (int i = 0; i < size; i++) {
             if (chest.getContainer().getItem(i).is(air)) {
-                //CompoundTag tag = new CompoundTag();
-                //tag.putString("Lore", "This is a test");
                 ItemStack itemStack = new ItemStack(impp);
-                //impp.appendHoverText(itemStack, event.getEntity().level, );
-
-
-
-                //itemStack.setTag(tag);
                 chest.getContainer().setItem(i, itemStack);
                 break;
             }
         }
-
-        //LOGGER.info(InventoryItemsRegistration.IMPORTANT_PAPER.get().getDescriptionId());
     }
 }
