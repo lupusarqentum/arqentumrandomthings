@@ -10,17 +10,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 public class ImportantPaperSpawner {
 
     private static ImportantPaperSpawner self;
 
-    public static void init(IEventBus eventBus) {
+    public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
         eventBus.addListener(self::onChestOpened);
     }
 
-    private void onChestOpened(PlayerContainerEvent.Open event) {
+    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
         if (event.getEntity().level.isClientSide) {
             return;
         }
