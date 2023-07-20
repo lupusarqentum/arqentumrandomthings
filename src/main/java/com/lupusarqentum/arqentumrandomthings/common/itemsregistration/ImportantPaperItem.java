@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 

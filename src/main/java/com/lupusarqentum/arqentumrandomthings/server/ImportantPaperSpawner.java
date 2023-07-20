@@ -1,7 +1,7 @@
 package com.lupusarqentum.arqentumrandomthings.server;
 
 import com.lupusarqentum.arqentumrandomthings.common.Random;
-import com.lupusarqentum.arqentumrandomthings.itemsregistration.InventoryItemsRegistration;
+import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ChestMenu;
