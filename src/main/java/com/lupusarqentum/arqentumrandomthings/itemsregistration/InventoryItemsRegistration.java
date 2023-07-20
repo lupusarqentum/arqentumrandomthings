@@ -2,10 +2,8 @@ package com.lupusarqentum.arqentumrandomthings.itemsregistration;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -23,14 +21,5 @@ public class InventoryItemsRegistration {
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
-
-        modEventBus.addListener(new InventoryItemsRegistration()::onCreativeModeTabAdding);
-    }
-
-    public void onCreativeModeTabAdding(CreativeModeTabEvent.BuildContents event) {
-        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
-            //event.accept(IMPORTANT_PAPER);
-            return;
-        }
     }
 }

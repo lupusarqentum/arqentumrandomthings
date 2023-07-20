@@ -2,16 +2,7 @@ package com.lupusarqentum.arqentumrandomthings.common;
 
 public class Random {
 
-    private static java.util.Random gen;
-    private static boolean initialized = false;
-
-    public static void init() {
-        if (initialized) {
-            throw new RuntimeException("random gen is already initialized");
-        }
-        gen = new java.util.Random();
-        initialized = true;
-    }
+    private static java.util.Random gen = new java.util.Random();
 
     public static float nextFloat() {
         return gen.nextFloat();
