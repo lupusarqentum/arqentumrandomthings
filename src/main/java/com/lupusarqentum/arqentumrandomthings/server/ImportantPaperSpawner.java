@@ -5,6 +5,7 @@ import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.Inventory
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
@@ -18,7 +19,15 @@ import java.lang.reflect.Method;
 
 public class ImportantPaperSpawner {
 
+    private final Item AIR;
+    private final Item IMPORTANT_PAPER;
+
     private static ImportantPaperSpawner self;
+
+    private ImportantPaperSpawner() {
+        AIR = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
+        IMPORTANT_PAPER = InventoryItemsRegistration.IMPORTANT_PAPER_ITEM;
+    }
 
     public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
@@ -50,29 +59,38 @@ public class ImportantPaperSpawner {
     }
 
     private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
-        if (event.getEntity().level.isClientSide) {
+        if (event.getEntity().level.isClientSide
+                || Random.rollProbability(getSpawnProbability()) == false) {
             return;
         }
-        //if (!(Random.nextFloat() < 0.02)) {
-        //    return;
-        //}
-
-        Item air = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
-        Item impp = InventoryItemsRegistration.IMPORTANT_PAPER.get();
-
         Container chest = getContainerFrom(event);
         if (chest == null) {
             return;
         }
+        int free_slot_index = findFreeSlot(chest);
+        if (free_slot_index == -1) {
+            return;
+        }
+        chest.setItem(free_slot_index, getImportantPaperItemStack(event.getEntity()));
+    }
 
+    private float getSpawnProbability() {
+        return 0.003f;
+    }
+
+    private @NotNull ItemStack getImportantPaperItemStack(Player entity) {
+        ItemStack itemStack = new ItemStack(IMPORTANT_PAPER);
+        return itemStack;
+    }
+
+    private int findFreeSlot(@NotNull Container chest) {
         int size = chest.getContainerSize();
         for (int i = 0; i < size; i++) {
-            if (chest.getItem(i).is(air)) {
-                ItemStack itemStack = new ItemStack(impp);
-                chest.setItem(i, itemStack);
-                break;
+            if (chest.getItem(i).is(AIR)) {
+                return i;
             }
         }
+        return -1;
     }
 
 }

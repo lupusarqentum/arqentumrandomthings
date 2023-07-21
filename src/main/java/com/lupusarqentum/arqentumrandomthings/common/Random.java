@@ -8,6 +8,8 @@ public class Random {
         return gen.nextFloat();
     }
 
+    public static boolean rollProbability(float probability) { return nextFloat() < probability; }
+
     public static int nextInt(int min_inclusive, int max_inclusive) {
         if (min_inclusive > max_inclusive) {
             throw new RuntimeException("invalid arguments");
