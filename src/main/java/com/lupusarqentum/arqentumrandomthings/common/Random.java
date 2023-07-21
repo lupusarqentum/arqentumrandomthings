@@ -12,7 +12,7 @@ public class Random {
 
     public static int nextInt(int min_inclusive, int max_inclusive) {
         if (min_inclusive > max_inclusive) {
-            throw new RuntimeException("invalid arguments");
+            Logger.error("Arqentum Random.nextInt received invalid arguments min & max:", min_inclusive, max_inclusive);
         }
 
         int generated = gen.nextInt();

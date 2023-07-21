@@ -1,7 +1,10 @@
 package com.lupusarqentum.arqentumrandomthings.server;
 
+import com.lupusarqentum.arqentumrandomthings.common.Logger;
 import com.lupusarqentum.arqentumrandomthings.common.Random;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
+
+import java.lang.reflect.Method;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -15,7 +18,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.lang.reflect.Method;
 
 public class ImportantPaperSpawner {
 
@@ -52,11 +54,26 @@ public class ImportantPaperSpawner {
 
     private int findFreeSlot(@NotNull Container chest) {
         int size = chest.getContainerSize();
+        int freeSlotsCount = 0;
+        Item air = getAirItem();
         for (int i = 0; i < size; i++) {
-            if (chest.getItem(i).is(getAirItem())) {
-                return i;
+            if (chest.getItem(i).is(air)) {
+                freeSlotsCount++;
             }
         }
+        if (freeSlotsCount == 0) {
+            return -1;
+        }
+        int freeSlotToReturnNumber = Random.nextInt(1, freeSlotsCount);
+        for (int i = 0; i < size; i++) {
+            if (chest.getItem(i).is(air)) {
+                freeSlotToReturnNumber--;
+                if (freeSlotToReturnNumber == 0) {
+                    return i;
+                }
+            }
+        }
+        Logger.error("Important Paper Spawning failed #68305");
         return -1;
     }
 
@@ -66,7 +83,7 @@ public class ImportantPaperSpawner {
     }
 
     private float getSpawnProbability() {
-        return 0.03f;
+        return 0.3f;
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {
