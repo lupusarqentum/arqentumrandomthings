@@ -2,6 +2,7 @@ package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 
+import com.lupusarqentum.arqentumrandomthings.client.DateLocalizationHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,7 +27,7 @@ public class ImportantPaperItem extends Item {
         if (stack.getTag() != null) {
             tooltip.add(Component.literal(stack.getTag().getString("player_received")));
             int[] arr = stack.getTag().getIntArray("receipt_date");
-            tooltip.add(Component.literal(arr[0] + "." + arr[1] + "." + arr[2]));
+            tooltip.add(Component.literal(DateLocalizationHelper.localizeDate(arr[2], arr[1], arr[0])));
         }
     }
 }
