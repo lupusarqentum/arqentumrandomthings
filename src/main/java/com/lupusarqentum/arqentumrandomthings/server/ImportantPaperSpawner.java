@@ -1,5 +1,6 @@
 package com.lupusarqentum.arqentumrandomthings.server;
 
+import com.lupusarqentum.arqentumrandomthings.common.Logger;
 import com.lupusarqentum.arqentumrandomthings.common.Random;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 
@@ -19,8 +20,8 @@ import java.lang.reflect.Method;
 
 public class ImportantPaperSpawner {
 
-    private final Item AIR;
-    private final Item IMPORTANT_PAPER;
+    private Item AIR;
+    private Item IMPORTANT_PAPER;
 
     private static ImportantPaperSpawner self;
 
@@ -32,6 +33,22 @@ public class ImportantPaperSpawner {
     public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
         eventBus.addListener(self::onChestOpened);
+    }
+
+    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
+        if (event.getEntity().level.isClientSide
+                || Random.rollProbability(getSpawnProbability()) == false) {
+            return;
+        }
+        Container chest = getContainerFrom(event);
+        if (chest == null) {
+            return;
+        }
+        int free_slot_index = findFreeSlot(chest);
+        if (free_slot_index == -1) {
+            return;
+        }
+        chest.setItem(free_slot_index, getImportantPaperItemStack(event.getEntity()));
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {
@@ -58,24 +75,8 @@ public class ImportantPaperSpawner {
         return null;
     }
 
-    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
-        if (event.getEntity().level.isClientSide
-                || Random.rollProbability(getSpawnProbability()) == false) {
-            return;
-        }
-        Container chest = getContainerFrom(event);
-        if (chest == null) {
-            return;
-        }
-        int free_slot_index = findFreeSlot(chest);
-        if (free_slot_index == -1) {
-            return;
-        }
-        chest.setItem(free_slot_index, getImportantPaperItemStack(event.getEntity()));
-    }
-
     private float getSpawnProbability() {
-        return 0.003f;
+        return 3f;
     }
 
     private @NotNull ItemStack getImportantPaperItemStack(Player entity) {
@@ -85,11 +86,25 @@ public class ImportantPaperSpawner {
 
     private int findFreeSlot(@NotNull Container chest) {
         int size = chest.getContainerSize();
+        int freeSlotsCount = 0;
         for (int i = 0; i < size; i++) {
             if (chest.getItem(i).is(AIR)) {
-                return i;
+                freeSlotsCount++;
             }
         }
+        if (freeSlotsCount == 0) {
+            return -1;
+        }
+        int freeSlotToReturnNumber = Random.nextInt(1, freeSlotsCount);
+        for (int i = 0; i < size; i++) {
+            if (chest.getItem(i).is(AIR)) {
+                freeSlotToReturnNumber--;
+                if (freeSlotToReturnNumber == 0) {
+                    return i;
+                }
+            }
+        }
+        Logger.error("Important Paper Spawning failed #68305");
         return -1;
     }
 
