@@ -1,5 +1,20 @@
 {
   "item.arqentumrandomthings.important_paper": "Электронная повестка",
-  "arqentumrandomthings.tooltip.paper.important": "На основании закона РФ \"О воинской обязанности и военной службе\" Вы обязаны 10 июля 2023 года явиться в отдел ближайшего комиссариата.",
-  "arqentumrandomthings.tooltip.paper.important2": " При себе иметь паспорт (документ, удостоверяющий личность)"
+  "arqentumrandomthings.tooltip.paper.important": " На основании закона РФ \"О воинской обязанности и военной службе\" Вы обязаны {0} явиться в отдел ближайшего комиссариата.",
+  "arqentumrandomthings.tooltip.paper.important2": " При себе иметь паспорт (документ, удостоверяющий личность)",
+  "arqentumrandomthings.tooltip.paper.important3": " Кому: {0}",
+  "arqentumrandomthings.tooltip.paper.important4": "Дата вручения: {0}",
+  "arqentumrandomthings.date_support.january": "января",
+  "arqentumrandomthings.date_support.february": "февраля",
+  "arqentumrandomthings.date_support.march": "марта",
+  "arqentumrandomthings.date_support.april": "апреля",
+  "arqentumrandomthings.date_support.may": "мая",
+  "arqentumrandomthings.date_support.june": "июня",
+  "arqentumrandomthings.date_support.july": "июля",
+  "arqentumrandomthings.date_support.august": "августа",
+  "arqentumrandomthings.date_support.september": "сентября",
+  "arqentumrandomthings.date_support.october": "октября",
+  "arqentumrandomthings.date_support.november": "ноября",
+  "arqentumrandomthings.date_support.december": "декабря",
+  "arqentumrandomthings.date_support.year": "года"
 }
