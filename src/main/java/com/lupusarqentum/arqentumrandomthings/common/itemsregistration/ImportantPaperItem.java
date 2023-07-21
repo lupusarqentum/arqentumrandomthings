@@ -22,12 +22,64 @@ public class ImportantPaperItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important"));
-        tooltip.add(Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important2"));
-        if (stack.getTag() != null) {
-            tooltip.add(Component.literal(stack.getTag().getString("player_received")));
-            int[] arr = stack.getTag().getIntArray("receipt_date");
-            tooltip.add(Component.literal(DateLocalizationHelper.localizeDate(arr[2], arr[1], arr[0])));
+        if (stack.getTag() == null) {
+            return;
         }
+        if (stack.getTag().getString("player_received") == null) {
+            return;
+        }
+        if (stack.getTag().getIntArray("receipt_date") == null) {
+            return;
+        }
+        if (stack.getTag().getIntArray("receipt_date").length != 3) {
+            return;
+        }
+
+        int[] initialDate = stack.getTag().getIntArray("receipt_date");
+        int[] ia_receiptDate = calculateReceiptDate(initialDate);
+        int[] ia_appearanceDate = calculateAppearanceDate(initialDate);
+        String receiptDate = DateLocalizationHelper.localizeDate(ia_receiptDate[2], ia_receiptDate[1], ia_receiptDate[0]);
+        String appearanceDate = DateLocalizationHelper.localizeDate(ia_appearanceDate[2], ia_appearanceDate[1], ia_appearanceDate[0]);
+        String playerName = stack.getTag().getString("player_received");
+
+        String part1 = Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important").getString();
+        tooltip.add(Component.literal(String.format(part1, appearanceDate)));
+        tooltip.add(Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important2"));
+        String toWhom = Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important3").getString();
+        tooltip.add(Component.literal(String.format(toWhom, playerName)));
+        String receiptDateTooltip = Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important4").getString();
+        tooltip.add(Component.literal(String.format(receiptDateTooltip, receiptDate)));
+    }
+
+    private int[] calculateReceiptDate(int @NotNull [] initialDate) {
+        int day = initialDate[2];
+        int month = initialDate[1];
+        int year = initialDate[0];
+        day -= 20;
+        if (day <= 0) {
+            day = 28 - day;
+            month--;
+            if (month == 0) {
+                month = 12;
+                year--;
+            }
+        }
+        return new int[] {year, month, day};
+    }
+
+    private int @NotNull [] calculateAppearanceDate(int @NotNull [] initialDate) {
+        int day = initialDate[2];
+        int month = initialDate[1];
+        int year = initialDate[0];
+        day++;
+        if (day >= 31 || (day >= 29 && month == 2)) {
+            day = 1;
+            month++;
+            if (month == 13) {
+                month = 1;
+                year++;
+            }
+        }
+        return new int[] {year, month, day};
     }
 }

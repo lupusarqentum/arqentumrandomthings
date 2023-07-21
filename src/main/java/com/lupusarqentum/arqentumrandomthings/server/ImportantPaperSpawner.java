@@ -6,7 +6,6 @@ import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.Inventory
 
 import java.lang.reflect.Method;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -19,10 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.injection.modify.LocalVariableDiscriminator;
 
 public class ImportantPaperSpawner {
 
