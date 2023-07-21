@@ -8,12 +8,9 @@ public class Random {
         return gen.nextFloat();
     }
 
-    public static boolean rollProbability(float probability) { return nextFloat() < probability; }
-
     public static int nextInt(int min_inclusive, int max_inclusive) {
         if (min_inclusive > max_inclusive) {
-            Logger.error("Arqentum Random.nextInt received invalid arguments min & max:", min_inclusive, max_inclusive);
-            return min_inclusive;
+            throw new RuntimeException("invalid arguments");
         }
 
         int generated = gen.nextInt();

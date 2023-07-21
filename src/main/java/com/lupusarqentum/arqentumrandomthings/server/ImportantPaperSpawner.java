@@ -1,12 +1,10 @@
 package com.lupusarqentum.arqentumrandomthings.server;
 
-import com.lupusarqentum.arqentumrandomthings.common.Logger;
 import com.lupusarqentum.arqentumrandomthings.common.Random;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
@@ -20,35 +18,11 @@ import java.lang.reflect.Method;
 
 public class ImportantPaperSpawner {
 
-    private Item AIR;
-    private Item IMPORTANT_PAPER;
-
     private static ImportantPaperSpawner self;
-
-    private ImportantPaperSpawner() {
-        AIR = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
-        IMPORTANT_PAPER = InventoryItemsRegistration.IMPORTANT_PAPER_ITEM;
-    }
 
     public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
         eventBus.addListener(self::onChestOpened);
-    }
-
-    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
-        if (event.getEntity().level.isClientSide
-                || Random.rollProbability(getSpawnProbability()) == false) {
-            return;
-        }
-        Container chest = getContainerFrom(event);
-        if (chest == null) {
-            return;
-        }
-        int free_slot_index = findFreeSlot(chest);
-        if (free_slot_index == -1) {
-            return;
-        }
-        chest.setItem(free_slot_index, getImportantPaperItemStack(event.getEntity()));
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {
@@ -75,37 +49,30 @@ public class ImportantPaperSpawner {
         return null;
     }
 
-    private float getSpawnProbability() {
-        return 3f;
-    }
+    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
+        if (event.getEntity().level.isClientSide) {
+            return;
+        }
+        //if (!(Random.nextFloat() < 0.02)) {
+        //    return;
+        //}
 
-    private @NotNull ItemStack getImportantPaperItemStack(Player entity) {
-        ItemStack itemStack = new ItemStack(IMPORTANT_PAPER);
-        return itemStack;
-    }
+        Item air = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
+        Item impp = InventoryItemsRegistration.IMPORTANT_PAPER.get();
 
-    private int findFreeSlot(@NotNull Container chest) {
+        Container chest = getContainerFrom(event);
+        if (chest == null) {
+            return;
+        }
+
         int size = chest.getContainerSize();
-        int freeSlotsCount = 0;
         for (int i = 0; i < size; i++) {
-            if (chest.getItem(i).is(AIR)) {
-                freeSlotsCount++;
+            if (chest.getItem(i).is(air)) {
+                ItemStack itemStack = new ItemStack(impp);
+                chest.setItem(i, itemStack);
+                break;
             }
         }
-        if (freeSlotsCount == 0) {
-            return -1;
-        }
-        int freeSlotToReturnNumber = Random.nextInt(1, freeSlotsCount);
-        for (int i = 0; i < size; i++) {
-            if (chest.getItem(i).is(AIR)) {
-                freeSlotToReturnNumber--;
-                if (freeSlotToReturnNumber == 0) {
-                    return i;
-                }
-            }
-        }
-        Logger.error("Important Paper Spawning failed #68305");
-        return -1;
     }
 
 }

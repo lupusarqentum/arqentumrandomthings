@@ -19,8 +19,6 @@ public class InventoryItemsRegistration {
     public static final RegistryObject<Item> IMPORTANT_PAPER = ITEMS.register(ItemsIDs.important_paper, () -> new ImportantPaperItem(
             new Item.Properties().fireResistant().rarity(Rarity.EPIC).stacksTo(1)));
 
-    public static final Item IMPORTANT_PAPER_ITEM = IMPORTANT_PAPER.get();
-
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
     }
