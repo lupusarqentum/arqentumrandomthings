@@ -5,7 +5,10 @@ import com.lupusarqentum.arqentumrandomthings.common.Random;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 
 import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -16,8 +19,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.injection.modify.LocalVariableDiscriminator;
 
 public class ImportantPaperSpawner {
 
@@ -77,8 +82,16 @@ public class ImportantPaperSpawner {
         return -1;
     }
 
-    private @NotNull ItemStack getImportantPaperItemStack(Player entity) {
+    private @NotNull ItemStack getImportantPaperItemStack(@NotNull Player entity) {
         ItemStack itemStack = new ItemStack(getImportantPaperItem());
+        LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int month = now.getMonth().getValue();
+        int day = now.getDayOfMonth();
+        CompoundTag nbt = new CompoundTag();
+        nbt.putString("player_received", entity.getDisplayName().getString());
+        nbt.putIntArray("receipt_date", new int[] {year, month, day});
+        itemStack.setTag(nbt);
         return itemStack;
     }
 

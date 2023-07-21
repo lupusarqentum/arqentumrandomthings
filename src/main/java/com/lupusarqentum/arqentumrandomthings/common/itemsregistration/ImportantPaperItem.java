@@ -9,6 +9,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -19,8 +20,13 @@ public class ImportantPaperItem extends Item {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, TooltipFlag flagIn) {
         tooltip.add(Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important"));
         tooltip.add(Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important2"));
+        if (stack.getTag() != null) {
+            tooltip.add(Component.literal(stack.getTag().getString("player_received")));
+            int[] arr = stack.getTag().getIntArray("receipt_date");
+            tooltip.add(Component.literal(arr[0] + "." + arr[1] + "." + arr[2]));
+        }
     }
 }
