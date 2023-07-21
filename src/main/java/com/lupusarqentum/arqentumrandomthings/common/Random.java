@@ -9,6 +9,19 @@ public class Random {
     }
 
     public static int nextInt(int min_inclusive, int max_inclusive) {
-        return gen.nextInt() % (max_inclusive - min_inclusive + 1) + min_inclusive;
+        if (min_inclusive > max_inclusive) {
+            throw new RuntimeException("invalid arguments");
+        }
+
+        int generated = gen.nextInt();
+        if (generated < 0) {
+            generated *= -1;
+        }
+
+        return generated % (max_inclusive - min_inclusive + 1) + min_inclusive;
+    }
+
+    public static int nextInt(int max_inclusive) {
+        return nextInt(0, max_inclusive);
     }
 }

@@ -5,27 +5,23 @@ import org.jetbrains.annotations.NotNull;
 
 public class Logger {
     private static final org.slf4j.Logger LOGGER = LogUtils.getLogger();
-    private static final char default_separator = ' ';
+    private static final String default_separator = " ";
 
-    public static void info(@NotNull Object obj) {
-        LOGGER.info(obj.toString());
-    }
-
-    public static void info(char sep, Object @NotNull ... obj) {
-        if (obj.length == 0) {
+    public static void infoSeparated(String separator, Object @NotNull ... mes) {
+        if (mes.length == 0) {
             return;
         }
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < obj.length - 1; i++) {
-            sb.append(obj[i].toString());
-            sb.append(sep);
+        for (int i = 0; i < mes.length - 1; i++) {
+            sb.append(mes[i].toString());
+            sb.append(separator);
         }
-        sb.append(obj[obj.length - 1].toString());
-        info(sb.toString());
+        sb.append(mes[mes.length - 1].toString());
+        LOGGER.info(sb.toString());
     }
 
-    public static void info(Object @NotNull ... obj) {
-        info(default_separator, obj);
+    public static void info(Object @NotNull ... mes) {
+        infoSeparated(default_separator, mes);
     }
 }
