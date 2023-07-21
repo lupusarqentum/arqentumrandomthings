@@ -5,6 +5,7 @@ import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.Inventory
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
@@ -23,6 +24,49 @@ public class ImportantPaperSpawner {
     public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
         eventBus.addListener(self::onChestOpened);
+    }
+
+    private @NotNull Item getAirItem() {
+        return ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
+    }
+
+    private @NotNull Item getImportantPaperItem() {
+        return InventoryItemsRegistration.IMPORTANT_PAPER.get();
+    }
+
+    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
+        if (event.getEntity().level.isClientSide
+                || Random.rollProbability(getSpawnProbability()) == false) {
+            return;
+        }
+        Container chest = getContainerFrom(event);
+        if (chest == null) {
+            return;
+        }
+        int free_slot_index = findFreeSlot(chest);
+        if (free_slot_index == -1) {
+            return;
+        }
+        chest.setItem(free_slot_index, getImportantPaperItemStack(event.getEntity()));
+    }
+
+    private int findFreeSlot(@NotNull Container chest) {
+        int size = chest.getContainerSize();
+        for (int i = 0; i < size; i++) {
+            if (chest.getItem(i).is(getAirItem())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private @NotNull ItemStack getImportantPaperItemStack(Player entity) {
+        ItemStack itemStack = new ItemStack(getImportantPaperItem());
+        return itemStack;
+    }
+
+    private float getSpawnProbability() {
+        return 0.03f;
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {
@@ -48,31 +92,4 @@ public class ImportantPaperSpawner {
         }
         return null;
     }
-
-    private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
-        if (event.getEntity().level.isClientSide) {
-            return;
-        }
-        //if (!(Random.nextFloat() < 0.02)) {
-        //    return;
-        //}
-
-        Item air = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:air"));
-        Item impp = InventoryItemsRegistration.IMPORTANT_PAPER.get();
-
-        Container chest = getContainerFrom(event);
-        if (chest == null) {
-            return;
-        }
-
-        int size = chest.getContainerSize();
-        for (int i = 0; i < size; i++) {
-            if (chest.getItem(i).is(air)) {
-                ItemStack itemStack = new ItemStack(impp);
-                chest.setItem(i, itemStack);
-                break;
-            }
-        }
-    }
-
 }

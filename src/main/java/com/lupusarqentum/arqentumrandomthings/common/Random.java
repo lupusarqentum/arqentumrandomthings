@@ -4,6 +4,8 @@ public class Random {
 
     private static java.util.Random gen = new java.util.Random();
 
+    public static boolean rollProbability(float probability) { return nextFloat() < probability; }
+
     public static float nextFloat() {
         return gen.nextFloat();
     }
