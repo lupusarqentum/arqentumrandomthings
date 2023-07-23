@@ -5,17 +5,25 @@ import com.lupusarqentum.arqentumrandomthings.common.Random;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 
 import java.lang.reflect.Method;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
@@ -25,9 +33,14 @@ public class ImportantPaperSpawner {
 
     private static ImportantPaperSpawner self;
 
+    private Map<String, Long> lastTimePLayerFishedUpItem;
+
     public static void init(@NotNull IEventBus eventBus) {
         self = new ImportantPaperSpawner();
+        self.lastTimePLayerFishedUpItem = new HashMap<String, Long>();
         eventBus.addListener(self::onChestOpened);
+        eventBus.addListener(self::onItemFished);
+        eventBus.addListener(self::onItemPickedUp);
     }
 
     private @NotNull Item getAirItem() {
@@ -38,9 +51,41 @@ public class ImportantPaperSpawner {
         return InventoryItemsRegistration.IMPORTANT_PAPER.get();
     }
 
+    private void onItemPickedUp(PlayerEvent.@NotNull ItemPickupEvent event) {
+        if (event.getEntity().level.isClientSide == true) {
+            return;
+        }
+        Player player = event.getEntity();
+        String playerName = player.getDisplayName().getString();
+        if (lastTimePLayerFishedUpItem.containsKey(playerName)) {
+            Long currentTimeSinceEpoch = Instant.now().getEpochSecond();
+            Long itemFishedTimeSinceEpoch = lastTimePLayerFishedUpItem.get(playerName);
+            if (currentTimeSinceEpoch - itemFishedTimeSinceEpoch < 4) {
+                if(player.getInventory().add(getImportantPaperItemStack(player)) == false) {
+                    // drop important paper in the world
+                    Level world = player.level;
+                    Vec3 playerPos = player.position();
+                    ItemStack itemStack = getImportantPaperItemStack(player);
+                    ItemEntity droppedItem = new ItemEntity(world, playerPos.x, playerPos.y + 1, playerPos.z, itemStack);
+                    world.addFreshEntity(droppedItem);
+                }
+            }
+            lastTimePLayerFishedUpItem.remove(playerName);
+        }
+    }
+
+    private void onItemFished(@NotNull ItemFishedEvent event) {
+        if (event.getEntity().level.isClientSide == false && Random.rollProbability(getFishingSpawnProbability())) {
+            Player player = event.getEntity();
+            String playerName = player.getDisplayName().getString();
+            Long timeSinceEpoch = Instant.now().getEpochSecond();
+            lastTimePLayerFishedUpItem.put(playerName, timeSinceEpoch);
+        }
+    }
+
     private void onChestOpened(PlayerContainerEvent.@NotNull Open event) {
         if (event.getEntity().level.isClientSide
-                || Random.rollProbability(getSpawnProbability()) == false) {
+                || Random.rollProbability(getChestSpawnProbability()) == false) {
             return;
         }
         Container chest = getContainerFrom(event);
@@ -92,8 +137,12 @@ public class ImportantPaperSpawner {
         return itemStack;
     }
 
-    private float getSpawnProbability() {
+    private float getChestSpawnProbability() {
         return 0.3f;
+    }
+
+    private float getFishingSpawnProbability() {
+        return 1f;
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {
