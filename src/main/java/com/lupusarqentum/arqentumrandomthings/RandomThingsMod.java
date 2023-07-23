@@ -1,10 +1,13 @@
 package com.lupusarqentum.arqentumrandomthings;
 
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
+import com.lupusarqentum.arqentumrandomthings.server.ServerConfig;
 import com.lupusarqentum.arqentumrandomthings.server.ServerSideFeaturesInitializer;
 
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(RandomThingsMod.MODID)
@@ -14,6 +17,8 @@ public class RandomThingsMod {
     public RandomThingsMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         InventoryItemsRegistration.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_SPEC);
 
         ServerSideFeaturesInitializer.init();
     }

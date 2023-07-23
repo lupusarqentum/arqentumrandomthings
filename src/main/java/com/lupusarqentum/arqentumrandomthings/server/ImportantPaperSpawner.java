@@ -133,12 +133,13 @@ public class ImportantPaperSpawner {
         return itemStack;
     }
 
-    private float getChestSpawnProbability() {
-        return 0.3f;
+    private double getChestSpawnProbability() {
+        return ServerConfig.importantPaperChestSpawningProbability.get();
     }
 
-    private float getFishingSpawnProbability() {
-        return 1f;
+    private double getFishingSpawnProbability() {
+
+        return ServerConfig.importantPaperFishingSpawningProbability.get();
     }
 
     private @Nullable Container getContainerFrom(@NotNull PlayerContainerEvent event) {

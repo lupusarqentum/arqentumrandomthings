@@ -4,10 +4,10 @@ public class Random {
 
     private static java.util.Random gen = new java.util.Random();
 
-    public static boolean rollProbability(float probability) { return nextFloat() < probability; }
+    public static boolean rollProbability(double probability) { return nextDouble() < probability; }
 
-    public static float nextFloat() {
-        return gen.nextFloat();
+    public static double nextDouble() {
+        return gen.nextDouble();
     }
 
     public static int nextInt(int min_inclusive, int max_inclusive) {
