@@ -19,8 +19,11 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 public class ImportantPaperItem extends Item {
-    public ImportantPaperItem(Properties p_41383_) {
-        super(p_41383_);
+    public ImportantPaperItem(Properties p_41383_) { super(p_41383_); }
+
+    @Override
+    public boolean isFoil(ItemStack itemStack) {
+        return true;
     }
 
     @OnlyIn(Dist.CLIENT)
