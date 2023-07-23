@@ -6,7 +6,6 @@ import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.Inventory
 
 import java.lang.reflect.Method;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -126,13 +125,10 @@ public class ImportantPaperSpawner {
 
     private @NotNull ItemStack getImportantPaperItemStack(@NotNull Player entity) {
         ItemStack itemStack = new ItemStack(getImportantPaperItem());
-        LocalDate now = LocalDate.now();
-        int year = now.getYear();
-        int month = now.getMonth().getValue();
-        int day = now.getDayOfMonth();
+        long creating_date = Instant.now().getEpochSecond();
         CompoundTag nbt = new CompoundTag();
         nbt.putString("player_received", entity.getDisplayName().getString());
-        nbt.putIntArray("receipt_date", new int[] {year, month, day});
+        nbt.putLong("paper_created_date", creating_date);
         itemStack.setTag(nbt);
         return itemStack;
     }

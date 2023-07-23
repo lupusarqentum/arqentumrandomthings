@@ -1,8 +1,9 @@
 package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
-
 import com.lupusarqentum.arqentumrandomthings.client.DateLocalizationHelper;
+
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,8 +13,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
+import javax.annotation.Nullable;
 
 public class ImportantPaperItem extends Item {
     public ImportantPaperItem(Properties p_41383_) {
@@ -22,25 +25,23 @@ public class ImportantPaperItem extends Item {
 
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, TooltipFlag flagIn) {
-        if (stack.getTag() == null) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt == null) {
             return;
         }
-        if (stack.getTag().getString("player_received") == null) {
+        if (nbt.contains("player_received") == false) {
             return;
         }
-        if (stack.getTag().getIntArray("receipt_date") == null) {
-            return;
-        }
-        if (stack.getTag().getIntArray("receipt_date").length != 3) {
+        if (nbt.contains("paper_created_date") == false) {
             return;
         }
 
-        int[] initialDate = stack.getTag().getIntArray("receipt_date");
+        long initialDate = nbt.getLong("paper_created_date");
         int[] ia_receiptDate = calculateReceiptDate(initialDate);
         int[] ia_appearanceDate = calculateAppearanceDate(initialDate);
         String receiptDate = DateLocalizationHelper.localizeDate(ia_receiptDate[2], ia_receiptDate[1], ia_receiptDate[0]);
         String appearanceDate = DateLocalizationHelper.localizeDate(ia_appearanceDate[2], ia_appearanceDate[1], ia_appearanceDate[0]);
-        String playerName = stack.getTag().getString("player_received");
+        String playerName = nbt.getString("player_received");
 
         String part1 = Component.translatable(RandomThingsMod.MODID + ".tooltip.paper.important").getString();
         tooltip.add(Component.literal(String.format(part1, appearanceDate)));
@@ -51,35 +52,15 @@ public class ImportantPaperItem extends Item {
         tooltip.add(Component.literal(String.format(receiptDateTooltip, receiptDate)));
     }
 
-    private int[] calculateReceiptDate(int @NotNull [] initialDate) {
-        int day = initialDate[2];
-        int month = initialDate[1];
-        int year = initialDate[0];
-        day -= 20;
-        if (day <= 0) {
-            day = 28 - day;
-            month--;
-            if (month == 0) {
-                month = 12;
-                year--;
-            }
-        }
-        return new int[] {year, month, day};
+    private int[] calculateReceiptDate(long initialDate) {
+        LocalDateTime datetime = LocalDateTime.ofEpochSecond(initialDate, 0, ZoneOffset.UTC);
+        LocalDateTime receiptDatetime = datetime.minusDays(19);
+        return new int[] {receiptDatetime.getYear(), receiptDatetime.getMonthValue(), receiptDatetime.getDayOfMonth()};
     }
 
-    private int @NotNull [] calculateAppearanceDate(int @NotNull [] initialDate) {
-        int day = initialDate[2];
-        int month = initialDate[1];
-        int year = initialDate[0];
-        day++;
-        if (day >= 31 || (day >= 29 && month == 2)) {
-            day = 1;
-            month++;
-            if (month == 13) {
-                month = 1;
-                year++;
-            }
-        }
-        return new int[] {year, month, day};
+    private int @NotNull [] calculateAppearanceDate(long initialDate) {
+        LocalDateTime datetime = LocalDateTime.ofEpochSecond(initialDate, 0, ZoneOffset.UTC);
+        LocalDateTime appearanceDatetime = datetime.plusDays(1);
+        return new int[] {appearanceDatetime.getYear(), appearanceDatetime.getMonthValue(), appearanceDatetime.getDayOfMonth()};
     }
 }
