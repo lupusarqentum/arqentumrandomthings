@@ -1,0 +1,21 @@
+{
+  "parent": "item/generated",
+  "overrides": [
+    { "predicate": { "custom_model_data": 1 }, "model": "arqentumrandomthings:item/pizza1slices" },
+    { "predicate": { "custom_model_data": 2 }, "model": "arqentumrandomthings:item/pizza2slices" },
+    { "predicate": { "custom_model_data": 3 }, "model": "arqentumrandomthings:item/pizza3slices" },
+    { "predicate": { "custom_model_data": 4 }, "model": "arqentumrandomthings:item/pizza4slices" },
+    { "predicate": { "custom_model_data": 5 }, "model": "arqentumrandomthings:item/pizza5slices" },
+    { "predicate": { "custom_model_data": 6 }, "model": "arqentumrandomthings:item/pizza6slices" },
+    { "predicate": { "custom_model_data": 7 }, "model": "arqentumrandomthings:item/pizza7slices" },
+    { "predicate": { "custom_model_data": 8 }, "model": "arqentumrandomthings:item/pizza8slices" },
+    { "predicate": { "custom_model_data": 9 }, "model": "arqentumrandomthings:item/pizza9slices" },
+    { "predicate": { "custom_model_data": 10 }, "model": "arqentumrandomthings:item/pizza10slices" },
+    { "predicate": { "custom_model_data": 11 }, "model": "arqentumrandomthings:item/pizza11slices" },
+    { "predicate": { "custom_model_data": 12 }, "model": "arqentumrandomthings:item/pizza12slices" },
+    { "predicate": { "custom_model_data": 13 }, "model": "arqentumrandomthings:item/pizza13slices" },
+    { "predicate": { "custom_model_data": 14 }, "model": "arqentumrandomthings:item/pizza14slices" },
+    { "predicate": { "custom_model_data": 15 }, "model": "arqentumrandomthings:item/pizza15slices" },
+    { "predicate": { "custom_model_data": 16 }, "model": "arqentumrandomthings:item/pizza16slices" }
+  ]
+}

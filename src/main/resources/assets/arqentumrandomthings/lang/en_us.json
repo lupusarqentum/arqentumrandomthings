@@ -4,6 +4,7 @@
   "arqentumrandomthings.tooltip.paper.important2": " При себе иметь паспорт (документ, удостоверяющий личность)",
   "arqentumrandomthings.tooltip.paper.important3": " Кому: %s",
   "arqentumrandomthings.tooltip.paper.important4": " Дата вручения: %s",
+
   "arqentumrandomthings.date_support.month1": "января",
   "arqentumrandomthings.date_support.month2": "февраля",
   "arqentumrandomthings.date_support.month3": "марта",
@@ -16,5 +17,18 @@
   "arqentumrandomthings.date_support.month10": "октября",
   "arqentumrandomthings.date_support.month11": "ноября",
   "arqentumrandomthings.date_support.month12": "декабря",
-  "arqentumrandomthings.date_support.date": "%s %s %s года"
+  "arqentumrandomthings.date_support.date": "%s %s %s года",
+
+  "item.arqentumrandomthings.pizza_dough": "Pizza Dough",
+  "item.arqentumrandomthings.vegetable_mix": "Vegetable Salad",
+  "item.arqentumrandomthings.meat_mix": "Meat Salad",
+  "item.arqentumrandomthings.cheese_bucket": "Cheese Bucket",
+  "item.arqentumrandomthings.cheese": "Cheese",
+  "item.arqentumrandomthings.raw_pizza": "Raw Pizza",
+  "item.arqentumrandomthings.pizza": "Pizza",
+
+  "block.arqentumrandomthings.cheese_block": "Cheese Block",
+
+  "arqentumrandomthings.tooltip.pizza0": "High energy food",
+  "arqentumrandomthings.tooltip.pizza": "%s slices left"
 }

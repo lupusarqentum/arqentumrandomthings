@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "arqentumrandomthings:cheese"
+    }
+  },
+  "result": {
+    "item": "arqentumrandomthings:cheese_block"
+  }
+}

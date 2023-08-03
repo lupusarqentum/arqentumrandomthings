@@ -10,6 +10,8 @@ public class ServerConfig {
     public static ForgeConfigSpec.DoubleValue importantPaperChestSpawningProbability;
     public static ForgeConfigSpec.DoubleValue importantPaperFishingSpawningProbability;
 
+    public static ForgeConfigSpec.BooleanValue doesPizzaRemoveHunger;
+
     static {
         ForgeConfigSpec.Builder configBuilder = new ForgeConfigSpec.Builder();
         setupConfig(configBuilder);
@@ -21,5 +23,7 @@ public class ServerConfig {
                 builder.defineInRange("important_paper_chest_spawning_chance", 0.003, 0, 1);
         importantPaperFishingSpawningProbability =
                 builder.defineInRange("important_paper_fishing_spawning_chance", 0.02, 0, 1);
+        doesPizzaRemoveHunger = builder.comment("Whether or not should pizza remove hunger effect on eating")
+                .define("pizza_removes_hunger", true);
     }
 }

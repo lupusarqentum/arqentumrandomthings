@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:egg" },
+    { "item": "minecraft:egg" },
+    { "item": "minecraft:wheat" },
+    { "item": "minecraft:wheat" },
+    { "item": "minecraft:wheat" },
+    { "item": "minecraft:redstone" },
+    { "item": "minecraft:sugar" },
+    { "item": "minecraft:water_bucket" }
+  ],
+  "result": {
+    "item": "arqentumrandomthings:pizza_dough",
+    "count": 1
+  }
+}

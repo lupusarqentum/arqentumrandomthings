@@ -1,5 +1,6 @@
 package com.lupusarqentum.arqentumrandomthings;
 
+import com.lupusarqentum.arqentumrandomthings.common.block.BlocksRegistration;
 import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
 import com.lupusarqentum.arqentumrandomthings.server.ServerConfig;
 import com.lupusarqentum.arqentumrandomthings.server.ServerSideFeaturesInitializer;
@@ -16,9 +17,11 @@ public class RandomThingsMod {
 
     public RandomThingsMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        BlocksRegistration.register(modEventBus);
         InventoryItemsRegistration.register(modEventBus);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ServerConfig.SERVER_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ServerConfig.SERVER_SPEC, "arqentumrandomthings.toml");
 
         ServerSideFeaturesInitializer.init();
     }

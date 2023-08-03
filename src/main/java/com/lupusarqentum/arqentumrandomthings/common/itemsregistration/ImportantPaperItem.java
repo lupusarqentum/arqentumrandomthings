@@ -32,10 +32,10 @@ public class ImportantPaperItem extends Item {
         if (nbt == null) {
             return;
         }
-        if (nbt.contains("player_received") == false) {
+        if (!nbt.contains("player_received")) {
             return;
         }
-        if (nbt.contains("paper_created_date") == false) {
+        if (!nbt.contains("paper_created_date")) {
             return;
         }
 
