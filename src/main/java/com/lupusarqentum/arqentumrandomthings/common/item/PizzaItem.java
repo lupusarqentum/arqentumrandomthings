@@ -1,7 +1,7 @@
-package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
-import com.lupusarqentum.arqentumrandomthings.server.ServerConfig;
+import com.lupusarqentum.arqentumrandomthings.common.ModConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;
@@ -28,7 +28,7 @@ public class PizzaItem extends Item {
     }
 
     public ItemStack getItemStackForCreativeTab() {
-        ItemStack creativeTabPizza = new ItemStack(InventoryItemsRegistration.PIZZA.get());
+        ItemStack creativeTabPizza = new ItemStack(ItemsRegistration.PIZZA.get());
         setSlicesCount(creativeTabPizza, INITIAL_SLICES_COUNT);
         return creativeTabPizza;
     }
@@ -48,7 +48,7 @@ public class PizzaItem extends Item {
     public @NotNull ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity livingEntity) {
         int slices_count = getSlicesCount(itemStack);
         super.finishUsingItem(itemStack, level, livingEntity);
-        if (!level.isClientSide && ServerConfig.doesPizzaRemoveHunger.get()) {
+        if (!level.isClientSide && ModConfig.doesPizzaRemoveHunger.get()) {
             livingEntity.removeEffect(MobEffects.HUNGER);
         }
         int slices_left = slices_count - 1;
@@ -56,7 +56,7 @@ public class PizzaItem extends Item {
                 || (livingEntity instanceof Player && ((Player)livingEntity).getAbilities().instabuild)) {
             return itemStack;
         }
-        ItemStack newItemStack = new ItemStack(InventoryItemsRegistration.PIZZA.get());
+        ItemStack newItemStack = new ItemStack(ItemsRegistration.PIZZA.get());
         setSlicesCount(newItemStack, slices_left);
         return newItemStack;
     }

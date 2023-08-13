@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 import com.lupusarqentum.arqentumrandomthings.client.DateLocalizationHelper;

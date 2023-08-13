@@ -10,6 +10,13 @@ public class Random {
         return gen.nextDouble();
     }
 
+    public static double nextDouble(double min, double max) {
+        if (min > max) {
+            Logger.error("Arqentum Random.nextDouble received invalid arguments min & max:", min, max);
+        }
+        return min + nextDouble() * (max - min);
+    }
+
     public static int nextInt(int min_inclusive, int max_inclusive) {
         if (min_inclusive > max_inclusive) {
             Logger.error("Arqentum Random.nextInt received invalid arguments min & max:", min_inclusive, max_inclusive);

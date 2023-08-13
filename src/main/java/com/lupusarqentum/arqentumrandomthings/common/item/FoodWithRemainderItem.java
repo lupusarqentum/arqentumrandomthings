@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

@@ -1,8 +1,8 @@
 package com.lupusarqentum.arqentumrandomthings.common.block;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
-import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.Foods;
-import com.lupusarqentum.arqentumrandomthings.common.itemsregistration.InventoryItemsRegistration;
+import com.lupusarqentum.arqentumrandomthings.common.item.Foods;
+import com.lupusarqentum.arqentumrandomthings.common.item.ItemsRegistration;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
@@ -30,7 +30,7 @@ public class BlocksRegistration {
 
     public static final RegistryObject<Block> CHEESE_BLOCK = BLOCKS.register(BlocksIDs.CHEESE_BLOCK, () ->
             new Block(BlockBehaviour.Properties.of(Material.CAKE).strength(0.2f)));
-    public static final RegistryObject<Item> CHEESE_BLOCK_ITEM = InventoryItemsRegistration.ITEMS.register(BlocksIDs.CHEESE_BLOCK, () ->
+    public static final RegistryObject<Item> CHEESE_BLOCK_ITEM = ItemsRegistration.ITEMS.register(BlocksIDs.CHEESE_BLOCK, () ->
             new BlockItem(CHEESE_BLOCK.get(), new Item.Properties().food(Foods.CHEESE_BLOCK)));
 
     private static final HashMap<CreativeModeTab, ArrayList<String>> blockItemsToAddToCreativeTab = new HashMap<>();
@@ -50,7 +50,7 @@ public class BlocksRegistration {
 
     private static void registerBasicBlock(String blockID, Supplier<? extends Block> sup, CreativeModeTab tab) {
         BLOCKS.register(blockID, sup);
-        InventoryItemsRegistration.ITEMS.register(blockID, () ->
+        ItemsRegistration.ITEMS.register(blockID, () ->
                 new BlockItem(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(
                         new ResourceLocation(RandomThingsMod.MODID + ":" + blockID))), new Item.Properties()));
         if (blockItemsToAddToCreativeTab.containsKey(tab)) {

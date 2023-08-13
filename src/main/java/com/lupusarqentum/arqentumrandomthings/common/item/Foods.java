@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common.itemsregistration;
+package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 
@@ -11,8 +11,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryItemsRegistration {
-    public class ItemsIDs {
+public class ItemsRegistration {
+    public static class ItemsIDs {
         public static final String IMPORTANT_PAPER = "important_paper";
         public static final String PIZZA_DOUGH = "pizza_dough";
         public static final String VEGETABLE_MIX = "vegetable_mix";
@@ -46,7 +46,7 @@ public class InventoryItemsRegistration {
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
-        modEventBus.addListener(InventoryItemsRegistration::addToCreativeTab);
+        modEventBus.addListener(ItemsRegistration::addToCreativeTab);
     }
 
     private static void addToCreativeTab(CreativeModeTabEvent.@NotNull BuildContents event) {
