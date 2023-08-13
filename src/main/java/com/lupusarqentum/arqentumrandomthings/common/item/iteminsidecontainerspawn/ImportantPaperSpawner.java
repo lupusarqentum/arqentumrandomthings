@@ -1,7 +1,6 @@
 package com.lupusarqentum.arqentumrandomthings.common.item.iteminsidecontainerspawn;
 
-import com.lupusarqentum.arqentumrandomthings.common.ModConfig;
-import com.lupusarqentum.arqentumrandomthings.common.Util;
+import com.lupusarqentum.arqentumrandomthings.common.config.ModConfig;
 import com.lupusarqentum.arqentumrandomthings.common.item.ItemsRegistration;
 
 import net.minecraft.nbt.CompoundTag;

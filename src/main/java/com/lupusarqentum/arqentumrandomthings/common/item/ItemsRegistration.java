@@ -21,6 +21,7 @@ public class ItemsRegistration {
         public static final String RAW_PIZZA = "raw_pizza";
         public static final String PIZZA = "pizza";
         public static final String CHEESE_BUCKET = "cheese_bucket";
+        public static final String MATH_PROBLEM = "math_problem";
     }
 
     public static final Item BUCKET = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:bucket"));
@@ -43,6 +44,8 @@ public class ItemsRegistration {
     public static final RegistryObject<Item> PIZZA = ITEMS.register(ItemsIDs.PIZZA, PizzaItem::new);
     public static final RegistryObject<Item> CHEESE_BUCKET = ITEMS.register(ItemsIDs.CHEESE_BUCKET, () -> new FoodWithRemainderItem(
             new Item.Properties().food(Foods.CHEESE_BUCKET), BUCKET));
+    public static final RegistryObject<Item> MATH_PROBLEM = ITEMS.register(ItemsIDs.MATH_PROBLEM, () -> new FoilingItem(
+            new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);

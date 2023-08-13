@@ -1,8 +1,9 @@
 package com.lupusarqentum.arqentumrandomthings;
 
 import com.lupusarqentum.arqentumrandomthings.common.block.BlocksRegistration;
+import com.lupusarqentum.arqentumrandomthings.common.config.ProblemSetConfig;
 import com.lupusarqentum.arqentumrandomthings.common.item.ItemsRegistration;
-import com.lupusarqentum.arqentumrandomthings.common.ModConfig;
+import com.lupusarqentum.arqentumrandomthings.common.config.ModConfig;
 import com.lupusarqentum.arqentumrandomthings.common.item.ImportantPaperFishingSpawner;
 import com.lupusarqentum.arqentumrandomthings.common.item.iteminsidecontainerspawn.EmeraldPickaxeSpawner;
 import com.lupusarqentum.arqentumrandomthings.common.item.iteminsidecontainerspawn.ImportantPaperSpawner;
@@ -26,6 +27,7 @@ public class RandomThingsMod {
         ItemsRegistration.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.SERVER_SPEC, "arqentumrandomthings.toml");
+        ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.SERVER, ProblemSetConfig.SPEC, "arqentumrandomthings-problemset.toml");
 
         ItemInsideContainerSpawner.instance.init(MinecraftForge.EVENT_BUS);
         ItemInsideContainerSpawner.instance.addItemToSpawn(new ImportantPaperSpawner());

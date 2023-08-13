@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common;
+package com.lupusarqentum.arqentumrandomthings.common.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.jetbrains.annotations.NotNull;

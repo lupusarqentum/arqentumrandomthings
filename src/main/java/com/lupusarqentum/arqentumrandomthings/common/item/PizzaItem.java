@@ -1,7 +1,7 @@
 package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
-import com.lupusarqentum.arqentumrandomthings.common.ModConfig;
+import com.lupusarqentum.arqentumrandomthings.common.config.ModConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffects;

@@ -5,7 +5,6 @@ import com.lupusarqentum.arqentumrandomthings.client.DateLocalizationHelper;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -18,13 +17,8 @@ import java.time.ZoneOffset;
 import java.util.List;
 import javax.annotation.Nullable;
 
-public class ImportantPaperItem extends Item {
+public class ImportantPaperItem extends FoilingItem {
     public ImportantPaperItem(Properties p_41383_) { super(p_41383_); }
-
-    @Override
-    public boolean isFoil(ItemStack itemStack) {
-        return true;
-    }
 
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, TooltipFlag flagIn) {
