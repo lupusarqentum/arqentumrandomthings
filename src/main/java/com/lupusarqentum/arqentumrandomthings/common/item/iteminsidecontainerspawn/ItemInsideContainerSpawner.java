@@ -38,6 +38,9 @@ public class ItemInsideContainerSpawner {
         } catch (Exception e) {
             return;
         }
+        if (context.level().isClientSide) {
+            return;
+        }
 
         if (canMultipleItemsSpawnAtOnce()) {
             for (var itemSpawning : itemsSpawning) {

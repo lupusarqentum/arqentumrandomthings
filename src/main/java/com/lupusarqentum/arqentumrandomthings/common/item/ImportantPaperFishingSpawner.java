@@ -44,7 +44,7 @@ public class ImportantPaperFishingSpawner {
             Long currentTimeSinceEpoch = Instant.now().getEpochSecond();
             Long itemFishedTimeSinceEpoch = lastTimePLayerFishedUpItem.get(playerName);
             if (currentTimeSinceEpoch - itemFishedTimeSinceEpoch < 4) {
-                if(player.getInventory().add(getImportantPaperItemStack(player)) == false) {
+                if(!player.getInventory().add(getImportantPaperItemStack(player))) {
                     // drop important paper in the world
                     Level world = player.level;
                     Vec3 playerPos = player.position();
@@ -58,7 +58,7 @@ public class ImportantPaperFishingSpawner {
     }
 
     private void onItemFished(@NotNull ItemFishedEvent event) {
-        if (event.getEntity().level.isClientSide == false && Random.rollProbability(getFishingSpawnProbability())) {
+        if (!event.getEntity().level.isClientSide && Random.rollProbability(getFishingSpawnProbability())) {
             Player player = event.getEntity();
             String playerName = player.getDisplayName().getString();
             Long timeSinceEpoch = Instant.now().getEpochSecond();

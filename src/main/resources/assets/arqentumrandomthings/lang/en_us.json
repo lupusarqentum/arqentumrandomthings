@@ -26,7 +26,8 @@
   "item.arqentumrandomthings.cheese": "Cheese",
   "item.arqentumrandomthings.raw_pizza": "Raw Pizza",
   "item.arqentumrandomthings.pizza": "Pizza",
-  "item.arqentumrandomthings.math_problem": "Problem",
+  "item.arqentumrandomthings.math_problem": "Riddle by Jacque Fresco",
+  "arqentumrandomthings.tooltip.thinkngtime": "You have 30 seconds to think",
 
   "block.arqentumrandomthings.cheese_block": "Cheese Block",
 

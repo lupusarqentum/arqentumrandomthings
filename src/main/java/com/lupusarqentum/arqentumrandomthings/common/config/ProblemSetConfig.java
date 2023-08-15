@@ -23,7 +23,7 @@ public class ProblemSetConfig {
 
     private static void setupConfig(ForgeConfigSpec.@NotNull Builder builder) {
         problems = builder.comment("list of problem statements, e.g. [\"2+2=?\", " +
-                        "\"prove that for real a, b either a > b or b > a or b = a\"]")
+                        "\"there were two goats. how many?\"]")
                    .defineList("problems", Collections.emptyList(), o -> o instanceof String);
     }
 

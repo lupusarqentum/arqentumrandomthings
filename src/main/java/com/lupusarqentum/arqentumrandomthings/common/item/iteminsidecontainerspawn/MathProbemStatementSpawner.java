@@ -8,10 +8,10 @@ import com.lupusarqentum.arqentumrandomthings.common.item.ItemsRegistration;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.asm.util.throwables.SyntheticBridgeException;
 
 public class MathProbemStatementSpawner extends ItemInsideContainerSpawningParams {
     @Override
@@ -34,8 +34,10 @@ public class MathProbemStatementSpawner extends ItemInsideContainerSpawningParam
         CompoundTag displayTag = new CompoundTag();
         ListTag loreTag = new ListTag();
         StringTag nameTag = StringTag.valueOf(getNameComponentAsString());
-        StringTag stringTag = StringTag.valueOf(getLoreComponentAsString());
+        StringTag stringTag = StringTag.valueOf(getLoreFirstLineComponentAsString());
+        StringTag string2Tag = StringTag.valueOf(getLoreSecondLineComponentAsString());
         loreTag.add(0, stringTag);
+        loreTag.add(1, string2Tag);
         displayTag.put("Lore", loreTag);
         displayTag.put("Name", nameTag);
         nbt.put("display", displayTag);
@@ -47,8 +49,12 @@ public class MathProbemStatementSpawner extends ItemInsideContainerSpawningParam
         return "{\"translate\":\"" + nameLocalizationKey + "\",\"color\":\"dark_purple\",\"italic\":false}";
     }
 
-    private @NotNull String getLoreComponentAsString() {
+    private @NotNull String getLoreFirstLineComponentAsString() {
         return "{\"text\":\"" + getStatement() + "\",\"color\":\"white\",\"italic\":false}";
+    }
+
+    private @NotNull String getLoreSecondLineComponentAsString() {
+        return "{\"translate\":\"" + RandomThingsMod.MODID + ".tooltip.thinkngtime" + "\",\"color\":\"white\",\"italic\":true}";
     }
 
     private @NotNull String getStatement() {
