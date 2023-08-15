@@ -1,4 +1,4 @@
-package com.lupusarqentum.arqentumrandomthings.common;
+package com.lupusarqentum.arqentumrandomthings;
 
 import com.mojang.logging.LogUtils;
 import org.jetbrains.annotations.NotNull;

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DED",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "stick"
+    },
+    "E": {
+      "item": "emerald"
+    },
+    "D": {
+      "item": "diamond"
+    }
+  },
+  "result": {
+    "item": "arqentumrandomthings:emerald_pickaxe"
+  }
+}

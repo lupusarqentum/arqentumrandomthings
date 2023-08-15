@@ -1,13 +1,13 @@
 package com.lupusarqentum.arqentumrandomthings.common.item.iteminsidecontainerspawn;
 
-import com.lupusarqentum.arqentumrandomthings.common.Util;
+import com.lupusarqentum.arqentumrandomthings.util.Util;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import com.lupusarqentum.arqentumrandomthings.common.Logger;
-import com.lupusarqentum.arqentumrandomthings.common.Random;
+import com.lupusarqentum.arqentumrandomthings.Logger;
+import com.lupusarqentum.arqentumrandomthings.util.Random;
 
 public abstract class ItemInsideContainerSpawningParams {
     public abstract double getProbability(ItemInsideContainerSpawningContext context);

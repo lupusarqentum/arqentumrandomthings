@@ -1,7 +1,7 @@
 package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.common.config.ModConfig;
-import com.lupusarqentum.arqentumrandomthings.common.Random;
+import com.lupusarqentum.arqentumrandomthings.util.Random;
 
 import java.time.Instant;
 import java.util.HashMap;

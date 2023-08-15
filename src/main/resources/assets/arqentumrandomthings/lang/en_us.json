@@ -32,5 +32,10 @@
   "block.arqentumrandomthings.cheese_block": "Cheese Block",
 
   "arqentumrandomthings.tooltip.pizza0": "High energy food",
-  "arqentumrandomthings.tooltip.pizza": "%s slices left"
+  "arqentumrandomthings.tooltip.pizza": "%s slices left",
+
+  "arqentumrandomthings.diamond_dirt.lore": "The most valued thing in the whole minecraft",
+  "item.arqentumrandomthings.emerald_pickaxe": "Lucky Pickaxe",
+  "arqentumrandomthings.emerald_pickaxe.lore": "This pickaxe mines twice as many high-valued ores as a normal one. High-valued ores are diamond",
+  "arqentumrandomthings.emerald_pickaxe.loredrpg": ", rupee, arlemite, and realmite"
 }

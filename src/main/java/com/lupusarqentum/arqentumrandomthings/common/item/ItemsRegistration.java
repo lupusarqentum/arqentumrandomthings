@@ -2,14 +2,22 @@ package com.lupusarqentum.arqentumrandomthings.common.item;
 
 import com.lupusarqentum.arqentumrandomthings.RandomThingsMod;
 
+import com.lupusarqentum.arqentumrandomthings.util.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemsRegistration {
     public static class ItemsIDs {
@@ -22,6 +30,8 @@ public class ItemsRegistration {
         public static final String PIZZA = "pizza";
         public static final String CHEESE_BUCKET = "cheese_bucket";
         public static final String MATH_PROBLEM = "math_problem";
+        public static final String EMERALD_PICKAXE = "emerald_pickaxe";
+
     }
 
     public static final Item BUCKET = ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:bucket"));
@@ -46,6 +56,18 @@ public class ItemsRegistration {
             new Item.Properties().food(Foods.CHEESE_BUCKET), BUCKET));
     public static final RegistryObject<Item> MATH_PROBLEM = ITEMS.register(ItemsIDs.MATH_PROBLEM, () -> new FoilingItem(
             new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> EMERALD_PICKAXE = ITEMS.register(ItemsIDs.EMERALD_PICKAXE, () ->
+            new PickaxeItem(ToolTiers.EMERALD, 1, -2.8f, new Item.Properties()) {
+                @Override
+                @OnlyIn(Dist.CLIENT)
+                public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
+                    String lore1 = Component.translatable(RandomThingsMod.MODID + ".emerald_pickaxe.lore").getString();
+                    String lore2 = Util.isDivineRPGLoaded() ?
+                            Component.translatable(RandomThingsMod.MODID + ".emerald_pickaxe.loredrpg").getString() : "";
+                    Component text = Component.literal(lore1 + lore2);
+                    tooltip.add(text);
+                    super.appendHoverText(stack, worldIn, tooltip, flagIn);
+                }});
 
     public static void register(IEventBus modEventBus) {
         ITEMS.register(modEventBus);
@@ -61,6 +83,8 @@ public class ItemsRegistration {
             event.accept(CHEESE);
             event.accept(RAW_PIZZA);
             event.accept(((PizzaItem)(PIZZA.get())).getItemStackForCreativeTab());
+        } else if (event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(EMERALD_PICKAXE);
         }
     }
 }

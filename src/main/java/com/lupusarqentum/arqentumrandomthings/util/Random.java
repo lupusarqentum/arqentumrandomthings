@@ -1,4 +1,6 @@
-package com.lupusarqentum.arqentumrandomthings.common;
+package com.lupusarqentum.arqentumrandomthings.util;
+
+import com.lupusarqentum.arqentumrandomthings.Logger;
 
 public class Random {
 

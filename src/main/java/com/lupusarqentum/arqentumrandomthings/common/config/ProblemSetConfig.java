@@ -1,6 +1,6 @@
 package com.lupusarqentum.arqentumrandomthings.common.config;
 
-import com.lupusarqentum.arqentumrandomthings.common.Random;
+import com.lupusarqentum.arqentumrandomthings.util.Random;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

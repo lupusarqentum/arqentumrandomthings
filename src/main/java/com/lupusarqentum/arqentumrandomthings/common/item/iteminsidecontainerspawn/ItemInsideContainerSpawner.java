@@ -1,7 +1,7 @@
 package com.lupusarqentum.arqentumrandomthings.common.item.iteminsidecontainerspawn;
 
 import com.lupusarqentum.arqentumrandomthings.common.config.ModConfig;
-import com.lupusarqentum.arqentumrandomthings.common.Random;
+import com.lupusarqentum.arqentumrandomthings.util.Random;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

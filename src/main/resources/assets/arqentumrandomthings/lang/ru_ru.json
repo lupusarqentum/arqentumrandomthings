@@ -32,5 +32,10 @@
   "block.arqentumrandomthings.cheese_block": "Блок сыра",
 
   "arqentumrandomthings.tooltip.pizza0": "Высококалорийная пища",
-  "arqentumrandomthings.tooltip.pizza": "Осталось %s кусков"
+  "arqentumrandomthings.tooltip.pizza": "Осталось %s кусков",
+
+  "arqentumrandomthings.diamond_dirt.lore": "Самый ценный предмет в игре",
+  "item.arqentumrandomthings.emerald_pickaxe": "Счастливая кирка",
+  "arqentumrandomthings.emerald_pickaxe.lore": "Эта кирка добывает в два раза больше чем обычно алмазов",
+  "arqentumrandomthings.emerald_pickaxe.loredrpg": ", рупия, арлемита и реалмита"
 }
